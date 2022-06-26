@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/mdrakiburrahman/openshift-app-of-apps.git'
     path: ${unique-path-per-overlay}
-    targetRevision: master
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: openshift-machine-api
