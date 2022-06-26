@@ -1,0 +1,44 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  labels:
+    machine.openshift.io/cluster-api-cluster: ${infra_id}
+  name: worker-big
+  namespace: openshift-machine-api
+spec:
+  replicas: ${replicas}
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: ${infra_id}
+      machine.openshift.io/cluster-api-machineset: ${infra_id}-${name}
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: ${infra_id}
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: ${infra_id}-${name}
+    spec:
+      providerSpec:
+        value:
+          apiVersion: machine.openshift.io/v1beta1
+          credentialsSecret:
+            name: vsphere-cloud-credentials
+          diskGiB: ${disk}
+          kind: VSphereMachineProviderSpec
+          memoryMiB: ${mem}
+          network:
+            devices:
+              - networkName: ${network}
+          numCPUs: ${cpu}
+          numCoresPerSocket: 2
+          snapshot: ""
+          template: ${infra_id}-rhcos
+          userDataSecret:
+            name: worker-user-data
+          workspace:
+            datacenter: ${datacenter}
+            datastore: ${datastore}
+            folder: /${datacenter}/vm/${infra_id}
+            resourcePool: /${datacenter}/host/${resourcepool}/Resources
+            server: ${server}
