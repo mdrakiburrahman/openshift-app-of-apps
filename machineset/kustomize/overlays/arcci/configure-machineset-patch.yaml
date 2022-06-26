@@ -6,7 +6,7 @@ metadata:
   name: worker-big
   namespace: openshift-machine-api
 spec:
-  replicas: 3 # Tweak this and merge to main as needed
+  replicas: 2 # Tweak this and merge to main as needed
   selector:
     matchLabels:
       machine.openshift.io/cluster-api-cluster: arcci-jlzvv
