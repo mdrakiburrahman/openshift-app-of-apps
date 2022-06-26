@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ssh://git@github.com:mdrakiburrahman/openshift-app-of-apps.git
+    repoURL: 'https://github.com/mdrakiburrahman/openshift-app-of-apps.git'
     path: ${unique-path-per-overlay}
     targetRevision: master
   destination:
