@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - machineset.yaml
   - metallb.yaml
-  - sealed-secrets.yaml
+  # - sealed-secrets.yaml
