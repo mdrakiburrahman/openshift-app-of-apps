@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1alpha1
+kind: AddressPool
+metadata:
+  name: metallb-addresspool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.216.175.48-10.216.175.79

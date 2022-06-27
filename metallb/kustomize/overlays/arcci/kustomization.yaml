@@ -5,5 +5,5 @@ resources:
 - ../../base
 
 patchesStrategicMerge:
-- machineset-patch.yaml
-- metallb-patch.yaml
+- addresspool-patch.yaml
+- subscription-patch.yaml
