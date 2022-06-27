@@ -7,3 +7,4 @@ resources:
 patchesStrategicMerge:
 - machineset-patch.yaml
 - metallb-patch.yaml
+- sealed-secrets-patch.yaml

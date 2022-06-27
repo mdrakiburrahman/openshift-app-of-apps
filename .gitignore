@@ -36,6 +36,9 @@ override.tf.json
 openshift-install/secrets/
 openshift-install/binaries/
 **/kubeconfig
+**/.keys
+.keys
+.crt
 
 # Scratchpad
 arc-rbac-manual/*
