@@ -22,3 +22,9 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  # https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/
+  ignoreDifferences:
+    - group: core
+      kind: Secret
+      jqPathExpressions:
+        - .data
