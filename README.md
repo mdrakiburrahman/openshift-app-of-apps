@@ -13,6 +13,7 @@ Learning how to bootstrap OpenShift on vSphere with ArgoCD App of Apps:
 
 ## Bitnami Sealed Secret pre-req
 
+### One-time secret gen
 To avoid having multiple sealed secrets per Cluster to pull out, we generate our own, and can put it in AKV someday:
 ```bash
 export PRIVATEKEY="seal.key"
@@ -23,20 +24,23 @@ export SECRETNAME="seal-cert"
 # Go into secret path that is NOT to be committed to git
 cd /workspaces/openshift-app-of-apps/.devcontainer/.keys
 
-kubectl create namespace "$NAMESPACE"
-# namespace/sealed-secrets created
 openssl req -x509 -nodes -newkey rsa:4096 -keyout "$PRIVATEKEY" -out "$PUBLICKEY" -subj "/CN=sealed-secret/O=sealed-secret"
 # Generating a RSA private key
 # .......................................................................................................................................++++
 # ................................................++++
 # writing new private key to 'seal.key'
 # -----
-kubectl -n "$NAMESPACE" create secret tls "$SECRETNAME" --cert="$PUBLICKEY" --key="$PRIVATEKEY"
-# secret/seal-cert created
 
-# Label it for BYOK: https://github.com/bitnami-labs/sealed-secrets/blob/main/docs/bring-your-own-certificates.md#create-a-tls-k8s-secret-using-your-recently-created-rsa-key-pair
-kubectl -n "$NAMESPACE" label secret "$SECRETNAME" sealedsecrets.bitnami.com/sealed-secrets-key=active
-# secret/seal-cert labeled
+# Create secret and label it for BYOK
+# https://github.com/bitnami-labs/sealed-secrets/blob/main/docs/bring-your-own-certificates.md
+kubectl -n "$NAMESPACE" create secret tls "$SECRETNAME" --cert="$PUBLICKEY" --key="$PRIVATEKEY" --dry-run=client -o yaml | kubectl label -f- --local 'sealedsecrets.bitnami.com/sealed-secrets-key=active' --dry-run=client -o yaml > sealed-secrets-secret.yaml
+```
+
+### Pre-create namespace and secret
+```bash
+kubectl create namespace "$NAMESPACE"
+kubectl apply -f /workspaces/openshift-app-of-apps/.devcontainer/.keys/sealed-secrets-secret.yaml
+# namespace/sealed-secrets created
 ```
 
 ## Kustomize sanity checks
