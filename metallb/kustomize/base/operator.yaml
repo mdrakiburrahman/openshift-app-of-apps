@@ -4,7 +4,7 @@ metadata:
   name: metallb-operator
   namespace: metallb-system
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   targetNamespaces:
   - metallb-system

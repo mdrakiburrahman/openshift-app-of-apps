@@ -6,4 +6,4 @@ resources:
 
 patchesStrategicMerge:
 - machineset-patch.yaml
-# - metallb-patch.yaml
+- metallb-patch.yaml

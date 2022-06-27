@@ -4,7 +4,7 @@ metadata:
   name: metallb-operator-sub
   namespace: metallb-system
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   channel: "${OC_VERSION}"
   name: metallb-operator
