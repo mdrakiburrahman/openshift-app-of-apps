@@ -101,6 +101,14 @@ RUN wget https://rakirahman.blob.core.windows.net/public/binaries/oc-${OC_VERSIO
 # Install VMWare govc
 RUN curl -L -o - "https://github.com/vmware/govmomi/releases/latest/download/govc_$(uname -s)_$(uname -m).tar.gz" | tar -C /usr/local/bin -xvzf - govc
 
+# Install ArgoCD CLI
+RUN curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 && \
+    chmod +x /usr/local/bin/argocd
+
+# Install Kubeseal
+RUN wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.14.1/kubeseal-linux-amd64 -O kubeseal && \
+    sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \

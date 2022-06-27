@@ -24,6 +24,7 @@ kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overla
 # Components
 kubectl kustomize /workspaces/openshift-app-of-apps/machineset/kustomize/overlays/arcci > .temp/machineset.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/metallb/kustomize/overlays/arcci > .temp/metallb.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/sealed-secrets/kustomize/overlays/arcci > .temp/sealed-secrets.yaml
 ```
 
 Dry run:
