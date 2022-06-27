@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - operator.yaml
-- subscription.yaml
-- metallb.yaml
-- addresspool.yaml
+# - subscription.yaml
+# - metallb.yaml
+# - addresspool.yaml
