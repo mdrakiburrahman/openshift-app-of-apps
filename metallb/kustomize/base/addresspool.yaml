@@ -5,6 +5,7 @@ metadata:
   namespace: metallb-system
   annotations:
     argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   protocol: layer2
   autoAssign: true
