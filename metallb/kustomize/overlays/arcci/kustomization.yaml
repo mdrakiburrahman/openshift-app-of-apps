@@ -5,5 +5,5 @@ resources:
 - ../../base
 
 patchesStrategicMerge:
-- addresspool-patch.yaml
-- subscription-patch.yaml
+# - addresspool-patch.yaml
+# - subscription-patch.yaml
