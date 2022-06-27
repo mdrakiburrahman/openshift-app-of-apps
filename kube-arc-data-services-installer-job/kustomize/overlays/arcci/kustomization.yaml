@@ -32,3 +32,23 @@ secretGenerator:
   behavior: replace
   type: Opaque
   namespace: azure-arc-kubernetes-bootstrap
+
+# Necessary for sealed Secrets to manage the generated Secret
+# https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md <- One Option, adds it to all Secrets and ConfigMaps
+# https://github.com/kubernetes-sigs/kustomize/issues/2179#issuecomment-582562891
+# https://fabianlee.org/2022/04/15/kubernetes-kustomize-transformations-with-patchesjson6902/
+# https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/patches/ <- Best option, used below
+patches:
+  - patch: |-
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: secret-envs
+        annotations:
+          sealedsecrets.bitnami.com/managed: "true"
+          sealedsecrets.bitnami.com/namespace-wide: "true"
+    target:
+      version: v1
+      kind: Secret
+      name: secret-envs
+      namespace: azure-arc-kubernetes-bootstrap

@@ -8,4 +8,4 @@ patchesStrategicMerge:
 - machineset-patch.yaml
 - metallb-patch.yaml
 - sealed-secrets-patch.yaml
-# - kube-arc-data-services-installer-job-patch.yaml
+- kube-arc-data-services-installer-job-patch.yaml
