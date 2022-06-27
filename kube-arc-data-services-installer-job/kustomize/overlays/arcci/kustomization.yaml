@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+- configs/azure-spn-secret.yaml
+
+# KangarooKube/kube-arc-data-services-installer-job assumes ConfigMap and Secrets will be passed in via env variables.
+# This is a problem in ArgoCD since there is no env variable.
+
+# ConfigMap: overwrite the existing Configmap with literals since these are non-secret anyway
+configMapGenerator:
+- name: config-envs
+  behavior: replace
+  namespace: azure-arc-kubernetes-bootstrap
+  envs:
+  - configs/configMap.env
+- name: dc-config
+  behavior: replace
+  namespace: azure-arc-kubernetes-bootstrap
+  files:
+    - configs/control.json
+
+# Secret: making this work with Sealed Secrets
+# https://github.com/kubernetes-sigs/kustomize/blob/master/examples/transformerconfigs/README.md#example
+configurations:
+  - configs/sealed-secret-config.yaml
+
+# Empty secret that will be overwritten by Sealed Secret above
+secretGenerator:
+- name: secret-envs
+  behavior: replace
+  type: Opaque
+  namespace: azure-arc-kubernetes-bootstrap

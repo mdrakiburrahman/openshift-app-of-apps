@@ -5,3 +5,4 @@ resources:
   - machineset.yaml
   - metallb.yaml
   - sealed-secrets.yaml
+  - kube-arc-data-services-installer-job.yaml

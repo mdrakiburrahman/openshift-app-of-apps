@@ -43,6 +43,38 @@ kubectl apply -f /workspaces/openshift-app-of-apps/.devcontainer/.keys/sealed-se
 # namespace/sealed-secrets created
 ```
 
+### `kube-arc-data-services-installer-job` Secret
+
+* Grab the Azure Service Principal ID from our env variables
+* Encrypt it with the sealed secret public key
+* Annotate it for the Secret Controller
+* Place in Kustomize overlay path
+
+```bash
+export PUBKEY='/workspaces/openshift-app-of-apps/.devcontainer/.keys/seal.crt'
+export OVERLAY_PATH='/workspaces/openshift-app-of-apps/kube-arc-data-services-installer-job/kustomize/overlays/arcci/configs'
+
+kubectl create secret \
+        generic secret-envs \
+        -n azure-arc-kubernetes-bootstrap \
+        --from-literal=CLIENT_ID=$spnClientId \
+        --from-literal=CLIENT_SECRET=$spnClientSecret \
+        --from-literal=SUBSCRIPTION_ID=$subscriptionId \
+        --from-literal=TENANT_ID=$spnTenantId \
+        --from-literal=AZDATA_USERNAME="boor" \
+        --from-literal=AZDATA_PASSWORD="acntorPRESTO!" \
+        --dry-run=client \
+        --output json \
+        | kubectl annotate -f- \
+        --local 'sealedsecrets.bitnami.com/managed=true' \
+        --dry-run=client \
+        --output json \
+        | kubeseal --cert $PUBKEY \
+        --scope namespace-wide \
+        --format=yaml \
+        | tee "${OVERLAY_PATH}/azure-spn-secret.yaml"
+```
+
 ## Kustomize sanity checks
 
 Generate the YAML Argo would end up applying:
@@ -56,6 +88,7 @@ kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overla
 kubectl kustomize /workspaces/openshift-app-of-apps/sealed-secrets/kustomize/overlays/arcci > .temp/sealed-secrets.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/machineset/kustomize/overlays/arcci > .temp/machineset.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/metallb/kustomize/overlays/arcci > .temp/metallb.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/kube-arc-data-services-installer-job/kustomize/overlays/arcci > .temp/kube-arc-data-services-installer-job.yaml
 ```
 
 Dry run:
