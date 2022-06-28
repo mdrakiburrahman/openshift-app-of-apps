@@ -5,9 +5,9 @@ metadata:
   namespace: azure-arc-data
 spec:
   activeDirectory:
-    realm: FG.CONTOSO.COM
-    netbiosDomainName: FG
-    ouDistinguishedName: "OU=arcou,DC=FG,DC=CONTOSO,DC=COM"
+    realm: fg.contoso.com
+    netbiosDomainName: fg
+    ouDistinguishedName: "OU=SQL MIs,OU=Arc CI,DC=fg,DC=contoso,DC=com" # Needs to be lowercase due to mutatingwebhook bug
     domainControllers:
       primaryDomainController:
         hostname: OCPLab-DC1.fg.contoso.com
