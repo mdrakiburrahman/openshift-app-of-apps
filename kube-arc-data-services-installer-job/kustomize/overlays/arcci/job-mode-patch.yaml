@@ -4,4 +4,4 @@ metadata:
   name: azure-arc-kubernetes-bootstrap
   namespace: azure-arc-kubernetes-bootstrap
   annotations:
-    DELETE_FLAG: 'false'
+    DELETE_FLAG: 'true'
