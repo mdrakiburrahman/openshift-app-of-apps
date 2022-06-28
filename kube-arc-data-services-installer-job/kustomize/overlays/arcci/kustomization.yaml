@@ -52,3 +52,19 @@ patches:
       kind: Secret
       name: secret-envs
       namespace: azure-arc-kubernetes-bootstrap
+
+  # https://github.com/argoproj/argo-cd/discussions/8555
+  # To get the job to rerun without messing around with CLI, we change this DELETE_FLAG annotation to be the same value as the ConfigMap
+  # Changing this annotation only triggers a job rerun, the actual behaviour is still driven by the ConfigMap
+  - patch: |-
+      apiVersion: batch/v1
+      kind: Job
+      metadata:
+        name: azure-arc-kubernetes-bootstrap
+        annotations:
+          DELETE_FLAG: "false"
+    target:
+      version: v1
+      kind: Job
+      name: azure-arc-kubernetes-bootstrap
+      namespace: azure-arc-kubernetes-bootstrap
