@@ -4,7 +4,7 @@ metadata:
   name: azure-arc-kubernetes-bootstrap
   namespace: azure-arc-kubernetes-bootstrap
   annotations:
-    DELETE_FLAG: 'false' # This is just to retrigger a deploy, the Job behavior is driven by the ConfigMap
+    DELETE_FLAG: 'true' # This is just to retrigger a deploy, the Job behavior is driven by the ConfigMap
     # https://serverfault.com/a/846293
     # https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#replace-resource-instead-of-applying-changes
     # https://github.com/argoproj/argo-cd/issues/2730
