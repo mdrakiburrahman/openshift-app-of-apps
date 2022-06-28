@@ -64,7 +64,7 @@ patches:
         annotations:
           DELETE_FLAG: "false"
     target:
-      version: v1
+      version: batch/v1
       kind: Job
       name: azure-arc-kubernetes-bootstrap
       namespace: azure-arc-kubernetes-bootstrap
