@@ -5,10 +5,5 @@ metadata:
   namespace: azure-arc-kubernetes-bootstrap
   annotations:
     DELETE_FLAG: 'false' # This is just to retrigger a deploy, the Job behavior is driven by the ConfigMap
-    # https://serverfault.com/a/846293
-    # https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#replace-resource-instead-of-applying-changes
-    # https://github.com/argoproj/argo-cd/issues/2730
-    argocd.argoproj.io/sync-options: Replace=true
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "3" # Run at the end
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
