@@ -1,0 +1,9 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: azure-arc-kubernetes-bootstrap
+  namespace: azure-arc-kubernetes-bootstrap
+  annotations:
+    DELETE_FLAG: 'false' # This is just to retrigger a deploy, the Job behavior is driven by the ConfigMap
+spec:
+  ttlSecondsAfterFinished: 100

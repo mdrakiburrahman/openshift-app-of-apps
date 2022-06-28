@@ -52,3 +52,10 @@ patches:
       kind: Secret
       name: secret-envs
       namespace: azure-arc-kubernetes-bootstrap
+
+# https://github.com/argoproj/argo-cd/discussions/8555
+# To get the job to rerun without messing around with CLI, we change this DELETE_FLAG annotation to be the same value as the ConfigMap
+# Changing this annotation only triggers a job rerun, the actual behaviour is still driven by the ConfigMap
+# The ttlSecondsAfterFinished should clean up the job after complete, which means that if we switch the annotation + ConfigMap value for DELETE_FLAG, the job should offboard ard
+patchesStrategicMerge:
+ - job-mode-patch.yaml
