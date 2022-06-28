@@ -1,0 +1,15 @@
+apiVersion: arcdata.microsoft.com/v1beta2
+kind: ActiveDirectoryConnector
+metadata:
+  name: adarc
+  namespace: azure-arc-data
+spec:
+  activeDirectory:
+    realm: FG.CONTOSO.COM
+    ouDistinguishedName: "OU=SQL MIs,OU=Arc CI,DC=FG,DC=CONTOSO,DC=COM"
+    domainControllers:
+      primaryDomainController:
+        hostname: OCPLab-DC1.fg.contoso.com
+  dns:
+    nameserverIPAddresses:
+      - 10.216.175.4

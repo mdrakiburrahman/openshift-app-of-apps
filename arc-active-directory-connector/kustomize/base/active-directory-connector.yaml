@@ -1,0 +1,18 @@
+apiVersion: arcdata.microsoft.com/v1beta2
+kind: ActiveDirectoryConnector
+metadata:
+  name: adarc
+  namespace: azure-arc-data
+spec:
+  activeDirectory:
+    realm: SUBDOMAIN.DOMAIN.COM
+    serviceAccountProvisioning: automatic
+    ouDistinguishedName: "OU=A,OU=B,DC=SUBDOMAIN,DC=DOMAIN,DC=COM"
+    domainServiceAccountSecret: adarc-dsa-secret
+    domainControllers:
+      primaryDomainController:
+        hostname: dc.subdomain.domain.com
+  dns:
+    preferK8sDnsForPtrLookups: false
+    nameserverIPAddresses:
+      - 0.0.0.0
