@@ -4,6 +4,5 @@ metadata:
   name: azure-arc-kubernetes-bootstrap
   namespace: azure-arc-kubernetes-bootstrap
   annotations:
-    DELETE_FLAG: 'false' # This is just to retrigger a deploy, the Job behavior is driven by the ConfigMap
-    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook: PostSync # Every time we run a sync, Argo will rerun this Job. This means if we change the ConfigMap and run a sync, this achieves our goal of onboard/offboard
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
