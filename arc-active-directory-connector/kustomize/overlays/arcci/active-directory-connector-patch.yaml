@@ -7,7 +7,7 @@ spec:
   activeDirectory:
     realm: FG.CONTOSO.COM
     netbiosDomainName: FG
-    ouDistinguishedName: "OU=SQL MIs,OU=Arc CI,DC=FG,DC=CONTOSO,DC=COM"
+    ouDistinguishedName: "OU=arcou,DC=FG,DC=CONTOSO,DC=COM"
     domainControllers:
       primaryDomainController:
         hostname: OCPLab-DC1.fg.contoso.com
