@@ -6,6 +6,7 @@ metadata:
 spec:
   activeDirectory:
     realm: FG.CONTOSO.COM
+    netbiosDomainName: FG
     ouDistinguishedName: "OU=SQL MIs,OU=Arc CI,DC=FG,DC=CONTOSO,DC=COM"
     domainControllers:
       primaryDomainController:

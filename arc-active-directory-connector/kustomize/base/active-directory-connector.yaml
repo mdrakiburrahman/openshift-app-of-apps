@@ -6,6 +6,7 @@ metadata:
 spec:
   activeDirectory:
     realm: SUBDOMAIN.DOMAIN.COM
+    netbiosDomainName: SUBDOMAIN
     serviceAccountProvisioning: automatic
     ouDistinguishedName: "OU=A,OU=B,DC=SUBDOMAIN,DC=DOMAIN,DC=COM"
     domainServiceAccountSecret: adarc-dsa-secret
