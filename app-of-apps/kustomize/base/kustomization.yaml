@@ -6,4 +6,4 @@ resources:
   - metallb.yaml
   - sealed-secrets.yaml
   - kube-arc-data-services-installer-job.yaml
-  # - arc-active-directory-connector.yaml
+  - arc-active-directory-connector.yaml
