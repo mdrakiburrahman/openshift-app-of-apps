@@ -31,7 +31,7 @@ spec:
   services:
     primary:
       type: LoadBalancer
-      dnsName: sql-gp-ad-1.devfg.rbc.com
+      dnsName: sql-gp-ad-1.fg.contoso.com
       port: 31433
   settings:
     network:
