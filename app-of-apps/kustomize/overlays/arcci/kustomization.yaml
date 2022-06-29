@@ -10,5 +10,5 @@ patchesStrategicMerge:
 - sealed-secrets-patch.yaml
 - kube-arc-data-services-installer-job-patch.yaml
 - arc-active-directory-connector-patch.yaml
-# - sql-healthcheck-patch.yaml
-- sql-gp-ad-1-patch.yaml
+- sql-healthcheck-patch.yaml
+# - sql-gp-ad-1-patch.yaml
