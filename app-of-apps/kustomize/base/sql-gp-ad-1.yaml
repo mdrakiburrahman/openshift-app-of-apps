@@ -17,6 +17,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: azure-arc-data
   syncPolicy:
-    automated: null
+    automated:
+      prune: true
     syncOptions:
       - CreateNamespace=false # azure-arc-data already exists
