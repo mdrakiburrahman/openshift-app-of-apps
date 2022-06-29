@@ -13,11 +13,12 @@ spec:
     repoURL: 'https://github.com/mdrakiburrahman/openshift-app-of-apps.git'
     path: ${unique-path-per-overlay}
     targetRevision: HEAD
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: azure-arc-data
   syncPolicy:
-    automated:
-      prune: true
+    automated: null
     syncOptions:
       - CreateNamespace=false # azure-arc-data already exists
