@@ -7,5 +7,5 @@ resources:
   - sealed-secrets.yaml
   - kube-arc-data-services-installer-job.yaml
   - arc-active-directory-connector.yaml
-  - sql-healthcheck.yaml
-  # - sql-gp-ad-1.yaml
+  # - sql-healthcheck.yaml
+  - sql-gp-ad-1.yaml
