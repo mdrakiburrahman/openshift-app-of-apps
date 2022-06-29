@@ -7,8 +7,8 @@ spec:
   activeDirectory:
     realm: FG.CONTOSO.COM
     netbiosDomainName: FG
-    # fg, contoso, com -> needs to be lowercase due to mutatingwebhook bug
-    ouDistinguishedName: "OU=arcou,DC=fg,DC=contoso,DC=com"
+    # fg, contoso, com -> needs to be lowercase due to mutatingwebhook "endswith" validation bug
+    ouDistinguishedName: "OU=SQL MIs,OU=Arc CI,DC=fg,DC=contoso,DC=com"
     domainControllers:
       primaryDomainController:
         hostname: OCPLab-DC1.fg.contoso.com
