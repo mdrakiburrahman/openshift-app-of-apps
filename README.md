@@ -90,6 +90,7 @@ kubectl kustomize /workspaces/openshift-app-of-apps/machineset/kustomize/overlay
 kubectl kustomize /workspaces/openshift-app-of-apps/metallb/kustomize/overlays/arcci > .temp/metallb.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/kube-arc-data-services-installer-job/kustomize/overlays/arcci > .temp/kube-arc-data-services-installer-job.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-active-directory-connector/kustomize/overlays/arcci > .temp/arc-active-directory-connector.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/sql-healthcheck/kustomize/overlays/arcci > .temp/sql-healthcheck.yaml
 ```
 
 Dry run:

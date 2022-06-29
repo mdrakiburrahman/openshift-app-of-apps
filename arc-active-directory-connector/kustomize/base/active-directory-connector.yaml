@@ -3,6 +3,8 @@ kind: ActiveDirectoryConnector
 metadata:
   name: adarc
   namespace: azure-arc-data
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   activeDirectory:
     realm: SUBDOMAIN.DOMAIN.COM

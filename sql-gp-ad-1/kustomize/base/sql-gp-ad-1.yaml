@@ -1,0 +1,54 @@
+apiVersion: sql.arcdata.microsoft.com/v5
+kind: SqlManagedInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: sql-gp-ad-1.yaml
+  namespace: azure-arc-data
+spec:
+  tier: GeneralPurpose
+  backup:
+    retentionPeriodInDays: 7
+  dev: true
+  forceHA: "true"
+  licenseType: LicenseIncluded
+  replicas: 1
+  scheduling:
+    default:
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+  security:
+    adminLoginSecret: sql-gp-ad-1-secret
+    activeDirectory:
+      connector:
+        name: adarc
+      accountName: sql-gp-ad-1-account
+  services:
+    primary:
+      type: LoadBalancer
+      dnsName: sql-gp-ad-1.devfg.rbc.com
+      port: 31433
+  settings:
+    network:
+      forceencryption: "0"
+      tlsprotocols: "1.2"
+    sqlagent:
+      enabled: "true"
+  storage:
+    data:
+      volumes:
+        - className: thin-csi
+          size: 5Gi
+    datalogs:
+      volumes:
+        - className: thin-csi
+          size: 5Gi
+    logs:
+      volumes:
+        - className: thin-csi
+          size: 5Gi

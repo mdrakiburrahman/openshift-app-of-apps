@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  # We want the ConfigMap name to match argocd-cm exactly
+  disableNameSuffixHash: true
+
+resources:
+  - argo-cm.yaml
+
+configMapGenerator:
+  - name: argocd-cm
+    namespace: argocd
+    behavior: merge # Merge with other deployment custom checks
+    files:
+      - resource.customizations.health.sql.arcdata.microsoft.com_SqlManagedInstance=configs/sqlmi-deployment.lua
+
+namespace: argocd
