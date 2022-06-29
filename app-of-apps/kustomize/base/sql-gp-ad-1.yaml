@@ -13,6 +13,8 @@ spec:
     repoURL: 'https://github.com/mdrakiburrahman/openshift-app-of-apps.git'
     path: ${unique-path-per-overlay}
     targetRevision: HEAD
+    directory: # testing
+      recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: azure-arc-data

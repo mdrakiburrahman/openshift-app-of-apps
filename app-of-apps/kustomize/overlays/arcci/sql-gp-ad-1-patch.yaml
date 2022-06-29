@@ -5,4 +5,5 @@ metadata:
   namespace: argocd
 spec:
   source:
-    path: sql-gp-ad-1/kustomize/overlays/arcci
+    path: sql-gp-ad-1-manual # testing
+    # path: sql-gp-ad-1/kustomize/overlays/arcci
