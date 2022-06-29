@@ -3,7 +3,7 @@ kind: SqlManagedInstance
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: sql-gp-ad-1.yaml
+  name: sql-gp-ad-1
   namespace: azure-arc-data
 spec:
   tier: GeneralPurpose
