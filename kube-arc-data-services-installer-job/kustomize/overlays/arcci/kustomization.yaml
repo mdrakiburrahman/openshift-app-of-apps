@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - ../../base
 - configs/azure-spn-secret.yaml
+- post-sync-configMap.yaml # As a workaround for keeping health of App from going green until Job succeeds
 
 # KangarooKube/kube-arc-data-services-installer-job assumes ConfigMap and Secrets will be passed in via env variables.
 # This is a problem in ArgoCD since there is no env variable.
@@ -47,6 +48,7 @@ patches:
         annotations:
           sealedsecrets.bitnami.com/managed: "true"
           sealedsecrets.bitnami.com/namespace-wide: "true"
+          argocd.argoproj.io/sync-wave: "1" # So this comes up before the Job to avoid race condition
     target:
       version: v1
       kind: Secret
