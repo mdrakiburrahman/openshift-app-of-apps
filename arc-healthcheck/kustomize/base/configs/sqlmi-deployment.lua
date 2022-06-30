@@ -1,17 +1,18 @@
 hs = {}
+
 if obj.status ~= nil then
   if obj.status.state == "Ready" then
-    hs.message = "Created SqlManagedInstance"
+    hs.message = "SqlManagedInstance deployment finished"
     hs.status = "Healthy"
     return hs
   end
   if obj.status.state == "Failed" then
+    hs.message = "Failed to deploy SqlManagedInstance"
     hs.status = "Degraded"
-    hs.message = "Failed to provision SqlManagedInstance"
     return hs
   end
 end
 
 hs.status = "Progressing"
-hs.message = "Creating SqlManagedInstance"
+hs.message = "SqlManagedInstance deployment in progress"
 return hs
