@@ -2,20 +2,20 @@ apiVersion: machine.openshift.io/v1beta1
 kind: MachineSet
 metadata:
   labels:
-    machine.openshift.io/cluster-api-cluster: arcci-jlzvv
+    machine.openshift.io/cluster-api-cluster: arcci-wcgvj
   name: worker-big
   namespace: openshift-machine-api
 spec:
-  replicas: 2 # Tweak this and merge to main as needed
+  replicas: 3 # Tweak this and merge to main as needed
   selector:
     matchLabels:
-      machine.openshift.io/cluster-api-cluster: arcci-jlzvv
-      machine.openshift.io/cluster-api-machineset: arcci-jlzvv-worker-big
+      machine.openshift.io/cluster-api-cluster: arcci-wcgvj
+      machine.openshift.io/cluster-api-machineset: arcci-wcgvj-worker-big
   template:
     metadata:
       labels:
-        machine.openshift.io/cluster-api-cluster: arcci-jlzvv
-        machine.openshift.io/cluster-api-machineset: arcci-jlzvv-worker-big
+        machine.openshift.io/cluster-api-cluster: arcci-wcgvj
+        machine.openshift.io/cluster-api-machineset: arcci-wcgvj-worker-big
     spec:
       providerSpec:
         value:
@@ -25,10 +25,10 @@ spec:
             devices:
               - networkName: DataSvc PG OCP VM Network (VLAN 111)
           numCPUs: 14
-          template: arcci-jlzvv-rhcos
+          template: arcci-wcgvj-rhcos
           workspace:
             datacenter: Redmond Datacenter
             datastore: ArcLab-NFS-01
-            folder: /Redmond Datacenter/vm/arcci-jlzvv
+            folder: /Redmond Datacenter/vm/arcci-wcgvj
             resourcePool: /Redmond Datacenter/host/ArcLab Workload Cluster/Resources
             server: arclab-vc.arclab.local

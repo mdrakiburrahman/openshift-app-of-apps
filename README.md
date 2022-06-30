@@ -13,37 +13,11 @@ Learning how to bootstrap OpenShift on vSphere with ArgoCD App of Apps:
 
 ## Bitnami Sealed Secret pre-req
 
-### One-time secret gen
-To avoid having multiple sealed secrets per Cluster to pull out, we generate our own, and can put it in AKV someday:
-```bash
-export PRIVATEKEY="seal.key"
-export PUBLICKEY="seal.crt"
-export NAMESPACE="sealed-secrets"
-export SECRETNAME="seal-cert"
+> We performed the BYOK injection in the onboarder repo
 
-# Go into secret path that is NOT to be committed to git
-cd /workspaces/openshift-app-of-apps/.devcontainer/.keys
+### `kube-arc-data-services-installer-job` Secret - one time generation
 
-openssl req -x509 -nodes -newkey rsa:4096 -keyout "$PRIVATEKEY" -out "$PUBLICKEY" -subj "/CN=sealed-secret/O=sealed-secret"
-# Generating a RSA private key
-# .......................................................................................................................................++++
-# ................................................++++
-# writing new private key to 'seal.key'
-# -----
-
-# Create secret and label it for BYOK
-# https://github.com/bitnami-labs/sealed-secrets/blob/main/docs/bring-your-own-certificates.md
-kubectl -n "$NAMESPACE" create secret tls "$SECRETNAME" --cert="$PUBLICKEY" --key="$PRIVATEKEY" --dry-run=client -o yaml | kubectl label -f- --local 'sealedsecrets.bitnami.com/sealed-secrets-key=active' --dry-run=client -o yaml > sealed-secrets-secret.yaml
-```
-
-### Pre-create namespace and secret
-```bash
-kubectl create namespace "$NAMESPACE"
-kubectl apply -f /workspaces/openshift-app-of-apps/.devcontainer/.keys/sealed-secrets-secret.yaml
-# namespace/sealed-secrets created
-```
-
-### `kube-arc-data-services-installer-job` Secret
+> This file is already encrypted and git committed, we only need to redo this unless the Azure Secrets changes for example.
 
 * Grab the Azure Service Principal ID from our env variables
 * Encrypt it with the sealed secret public key

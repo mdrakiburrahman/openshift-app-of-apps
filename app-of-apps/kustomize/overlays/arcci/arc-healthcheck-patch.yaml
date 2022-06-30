@@ -1,12 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: '4'
-  name: sql-healthcheck
+  name: arc-healthcheck
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   source:
-    path: sql-healthcheck/kustomize/overlays/arcci
+    path: arc-healthcheck/kustomize/overlays/arcci

@@ -5,10 +5,10 @@ resources:
 - ../../base
 
 patchesStrategicMerge:
-- machineset-patch.yaml
-- metallb-patch.yaml
-- sealed-secrets-patch.yaml
-- kube-arc-data-services-installer-job-patch.yaml
-- arc-active-directory-connector-patch.yaml
-- sql-healthcheck-patch.yaml
-- sql-gp-ad-1-patch.yaml
+- arc-healthcheck-patch.yaml
+# - machineset-patch.yaml
+# - metallb-patch.yaml
+# - sealed-secrets-patch.yaml
+# - kube-arc-data-services-installer-job-patch.yaml
+# - arc-active-directory-connector-patch.yaml
+# - sql-gp-ad-1-patch.yaml
