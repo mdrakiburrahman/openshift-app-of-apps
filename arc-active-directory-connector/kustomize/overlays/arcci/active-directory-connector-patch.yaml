@@ -11,7 +11,10 @@ spec:
     ouDistinguishedName: "OU=SQL MIs,OU=Arc CI,DC=fg,DC=contoso,DC=com"
     domainControllers:
       primaryDomainController:
-        hostname: OCPLab-DC1.fg.contoso.com
+        hostname: ocplab-dc1.fg.contoso.com
+      secondaryDomainControllers:
+      - hostname: ocplab-dc2.fg.contoso.com
   dns:
     nameserverIPAddresses:
       - 10.216.175.4
+      - 10.216.175.5

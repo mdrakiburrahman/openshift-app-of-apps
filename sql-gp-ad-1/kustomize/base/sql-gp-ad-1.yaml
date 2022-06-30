@@ -40,6 +40,10 @@ spec:
     sqlagent:
       enabled: "true"
   storage:
+    backups:
+      volumes:
+        - className: azure-file
+          size: 5Gi
     data:
       volumes:
         - className: thin-csi

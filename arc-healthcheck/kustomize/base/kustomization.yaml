@@ -16,7 +16,9 @@ configMapGenerator:
       - resource.customizations.health.argoproj.io_Application=configs/app-of-apps.lua
       - resource.customizations.health.machine.openshift.io_MachineSet=configs/machineset.lua
       # Sealed Secrets is just a native Deployment, already covered
-      # MetalLB is basically an OpenShift Subscription, which seems to have native healthcheck bundled with Argo here: https://github.com/argoproj/argo-cd/blob/master/resource_customizations/operators.coreos.com/Subscription/health.lua
+      # MetalLB
+        # Basically an OpenShift Subscription, which I confirmed has native healthcheck bundled with Argo here: https://github.com/argoproj/argo-cd/blob/master/resource_customizations/operators.coreos.com/Subscription/health.lua
+        # The MetalLB CRD does deploy "speaker" which has state in status.conditions[], so if I want can write a LUA script for this, not needed atm
       # The Kube job onboarder is at the end of the day a job - and it will only succeed if Data Controller is up, that will capture the SQL MI health
       - resource.customizations.health.arcdata.microsoft.com_ActiveDirectoryConnector=configs/activedirectoryconnector.lua
       - resource.customizations.health.sql.arcdata.microsoft.com_SqlManagedInstance=configs/sqlmi-deployment.lua
