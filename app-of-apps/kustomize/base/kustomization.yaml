@@ -5,7 +5,7 @@ resources:
   - arc-healthcheck.yaml
   - machineset.yaml
   - sealed-secrets.yaml
-  # - metallb.yaml
+  - metallb.yaml
   # - kube-arc-data-services-installer-job.yaml
   # - arc-active-directory-connector.yaml
   # - sql-gp-ad-1.yaml
