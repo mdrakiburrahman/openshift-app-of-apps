@@ -6,7 +6,7 @@ resources:
 
 patchesStrategicMerge:
 - arc-healthcheck-patch.yaml
-- machineset-patch.yaml
+# - machineset-patch.yaml
 # - metallb-patch.yaml
 # - sealed-secrets-patch.yaml
 # - kube-arc-data-services-installer-job-patch.yaml
