@@ -13,6 +13,7 @@ configMapGenerator:
     namespace: argocd
     behavior: merge # Merge with other deployment custom checks
     files:
+      - resource.customizations.health.argoproj.io_Application=configs/app-of-apps.lua
       - resource.customizations.health.sql.arcdata.microsoft.com_SqlManagedInstance=configs/sqlmi-deployment.lua
     # https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing
     # Forces MIs to break! Even though we deploy argo with this in the configmap - for some reason it didn't apply it

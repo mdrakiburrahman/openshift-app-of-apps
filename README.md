@@ -59,12 +59,12 @@ mkdir .temp
 kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overlays/arcci > .temp/argo.yaml
 
 # Components
-kubectl kustomize /workspaces/openshift-app-of-apps/sealed-secrets/kustomize/overlays/arcci > .temp/sealed-secrets.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/arc-healthcheck/kustomize/overlays/arcci > .temp/arc-healthcheck.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/machineset/kustomize/overlays/arcci > .temp/machineset.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/metallb/kustomize/overlays/arcci > .temp/metallb.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/sealed-secrets/kustomize/overlays/arcci > .temp/sealed-secrets.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/kube-arc-data-services-installer-job/kustomize/overlays/arcci > .temp/kube-arc-data-services-installer-job.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-active-directory-connector/kustomize/overlays/arcci > .temp/arc-active-directory-connector.yaml
-kubectl kustomize /workspaces/openshift-app-of-apps/sql-healthcheck/kustomize/overlays/arcci > .temp/sql-healthcheck.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/sql-gp-ad-1/kustomize/overlays/arcci > .temp/sql-gp-ad-1.yaml
 ```
 
