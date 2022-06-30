@@ -16,6 +16,9 @@ configMapGenerator:
       - resource.customizations.health.argoproj.io_Application=configs/app-of-apps.lua
       - resource.customizations.health.machine.openshift.io_MachineSet=configs/machineset.lua
       # Sealed Secrets is just a native Deployment, already covered
+      # MetalLB will end up being a DaemonSet at the end, and since Data Controller doesn't need LoadBalancer we should be ok
+      # The Kube job onboarder is at the end of the day a job - and it will only succeed if Data Controller is up, that will capture the SQL MI health
+      - resource.customizations.health.arcdata.microsoft.com_ActiveDirectoryConnector=configs/activedirectoryconnector.lua
       - resource.customizations.health.sql.arcdata.microsoft.com_SqlManagedInstance=configs/sqlmi-deployment.lua
     # https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing
     # Forces MIs to break! Even though we deploy argo with this in the configmap - for some reason it didn't apply it
