@@ -1,9 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-# Points to the repo so we are not duplicating YAML
-bases:
-- git::https://github.com/KangarooKube/kube-arc-data-services-installer-job.git//kustomize/overlays/ocp?ref=v0.0.1
-- azure-arc-data-namespace.yaml
-- dsa-secret.yaml
-- active-directory-connector.yaml

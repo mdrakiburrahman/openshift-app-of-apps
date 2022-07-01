@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - ../../base
 - configs/azure-spn-secret.yaml
+- post-sync-deployment.yaml # As a workaround for keeping health of App from going green until Job succeeds
 
 # KangarooKube/kube-arc-data-services-installer-job assumes ConfigMap and Secrets will be passed in via env variables.
 # This is a problem in ArgoCD since there is no env variable.
@@ -59,7 +60,4 @@ patches:
 # Changing this annotation only triggers a job rerun, the actual behaviour is still driven by the ConfigMap
 # The ttlSecondsAfterFinished should clean up the job after complete, which means that if we switch the annotation + ConfigMap value for DELETE_FLAG, the job should offboard ard
 patchesStrategicMerge:
- - azure-arc-data-namespace-patch.yaml
  - job-mode-patch.yaml
- - dsa-secret-patch.yaml
- - active-directory-connector-patch.yaml

@@ -4,7 +4,7 @@ metadata:
   name: adarc
   namespace: azure-arc-data
   annotations:
-    argocd.argoproj.io/sync-wave: "4" # ADC comes up at the very end
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   activeDirectory:
     realm: SUBDOMAIN.DOMAIN.COM
@@ -14,9 +14,7 @@ spec:
     domainServiceAccountSecret: adarc-dsa-secret
     domainControllers:
       primaryDomainController:
-        hostname: dc1.subdomain.domain.com
-      secondaryDomainControllers:
-      - hostname: dc2.subdomain.domain.com
+        hostname: dc.subdomain.domain.com
   dns:
     preferK8sDnsForPtrLookups: false
     nameserverIPAddresses:

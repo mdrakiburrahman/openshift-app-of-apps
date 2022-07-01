@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-sync-deployment
+  namespace: azure-arc-kubernetes-bootstrap
+  annotations:
+    argocd.argoproj.io/sync-wave: '3' # Run after Onboarding job completed
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: "http-server"

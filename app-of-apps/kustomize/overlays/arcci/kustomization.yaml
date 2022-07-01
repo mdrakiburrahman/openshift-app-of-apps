@@ -9,5 +9,6 @@ patchesStrategicMerge:
 - machineset-patch.yaml
 - sealed-secrets-patch.yaml
 - metallb-patch.yaml
-# - arc-data-services-onboard-patch.yaml
+- kube-arc-data-services-installer-job-patch.yaml
+# - arc-active-directory-connector-patch.yaml
 # - sql-gp-ad-1-patch.yaml
