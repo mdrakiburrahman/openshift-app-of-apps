@@ -9,3 +9,4 @@ resources:
   - kube-arc-data-services-installer-job.yaml
   - arc-active-directory-connector.yaml
   - sql-gp-ad-1.yaml
+  - sync-waves-demo.yml
