@@ -67,7 +67,7 @@ kubectl kustomize /workspaces/openshift-app-of-apps/kube-arc-data-services-insta
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-active-directory-connector/kustomize/overlays/arcci > .temp/arc-active-directory-connector.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/sql-gp-ad-1/kustomize/overlays/arcci > .temp/sql-gp-ad-1.yaml
 
-kubectl kustomize /workspaces/openshift-app-of-apps/sync-waves-demo/kustomize/overlays/arcci > .temp/sync-waves-demo.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/many-jobs-demo/kustomize/overlays/arcci > .temp/many-jobs-demo.yaml
 
 
 ```

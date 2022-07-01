@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sync-waves
+  name: many-jobs
   namespace: argocd
 spec:
   source:
-    path: sync-waves-demo/kustomize/overlays/arcci    
+    path: many-jobs-demo/kustomize/overlays/arcci
