@@ -16,12 +16,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: azure-arc-kubernetes-bootstrap
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  # syncPolicy:
+  #   automated:
+  #     prune: true
+  #     selfHeal: true
+  #   syncOptions:
+  #     - CreateNamespace=true
   # https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/
   ignoreDifferences:
     - kind: Secret
