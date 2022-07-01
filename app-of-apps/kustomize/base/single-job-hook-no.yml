@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: single-job
+  name: single-job-hook-no
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: '5'
@@ -9,7 +9,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: single-job
+    namespace: single-job-hook-no
     server: https://kubernetes.default.svc
   project: default
   source:

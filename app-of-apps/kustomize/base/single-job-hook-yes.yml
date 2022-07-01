@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: single-job-hook-yes
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '5'
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: single-job-hook-yes
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ${unique-path-per-overlay}
+    repoURL: 'https://github.com/mdrakiburrahman/openshift-app-of-apps.git'
+    targetRevision: HEAD
