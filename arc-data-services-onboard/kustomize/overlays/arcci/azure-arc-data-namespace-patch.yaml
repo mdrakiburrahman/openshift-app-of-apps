@@ -2,5 +2,3 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: azure-arc-data
-  annotations:
-    argocd.argoproj.io/sync-wave: "-2" # Pre-create
