@@ -9,5 +9,5 @@ patchesStrategicMerge:
 - machineset-patch.yaml
 - sealed-secrets-patch.yaml
 - metallb-patch.yaml
-# - arc-data-services-onboard-patch.yaml
-# - sql-gp-ad-1-patch.yaml
+- arc-data-services-onboard-patch.yaml
+- sql-gp-ad-1-patch.yaml
