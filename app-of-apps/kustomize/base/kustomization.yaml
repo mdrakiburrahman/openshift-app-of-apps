@@ -10,3 +10,4 @@ resources:
   - arc-active-directory-connector.yaml
   - sql-gp-ad-1.yaml
   - many-jobs-demo.yml
+  - single-job-demo.yml

@@ -13,3 +13,4 @@ patchesStrategicMerge:
 - arc-active-directory-connector-patch.yaml
 - sql-gp-ad-1-patch.yaml
 - many-jobs-demo-patch.yml
+- single-job-demo-patch.yml

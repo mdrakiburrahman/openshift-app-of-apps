@@ -68,10 +68,8 @@ kubectl kustomize /workspaces/openshift-app-of-apps/arc-active-directory-connect
 kubectl kustomize /workspaces/openshift-app-of-apps/sql-gp-ad-1/kustomize/overlays/arcci > .temp/sql-gp-ad-1.yaml
 
 # Jobs demo
-
+kubectl kustomize /workspaces/openshift-app-of-apps/single-job-demo/kustomize/overlays/arcci > .temp/single-job-demo.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/many-jobs-demo/kustomize/overlays/arcci > .temp/many-jobs-demo.yaml
-
-
 ```
 
 Dry run:
