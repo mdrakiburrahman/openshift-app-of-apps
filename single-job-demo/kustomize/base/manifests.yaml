@@ -12,6 +12,7 @@ kind: Job
 metadata:
   name: regular-job-no-hook # just a regular job, I want my app health to depend on this
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
