@@ -60,3 +60,5 @@ patches:
 # The ttlSecondsAfterFinished should clean up the job after complete, which means that if we switch the annotation + ConfigMap value for DELETE_FLAG, the job should offboard ard
 patchesStrategicMerge:
  - job-mode-patch.yaml
+ - dsa-secret-patch.yaml
+ - active-directory-connector-patch.yaml

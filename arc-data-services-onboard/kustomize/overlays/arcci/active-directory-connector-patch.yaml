@@ -3,6 +3,8 @@ kind: ActiveDirectoryConnector
 metadata:
   name: adarc
   namespace: azure-arc-data
+  annotations:
+    argocd.argoproj.io/sync-wave: "4" # ADC comes up at the very end
 spec:
   activeDirectory:
     realm: FG.CONTOSO.COM

@@ -1,8 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: arc-active-directory-connector
-  namespace: argocd
-spec:
-  source:
-    path: arc-active-directory-connector/kustomize/overlays/arcci

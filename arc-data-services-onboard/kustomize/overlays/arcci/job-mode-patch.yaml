@@ -5,5 +5,5 @@ metadata:
   namespace: azure-arc-kubernetes-bootstrap
   annotations:
     argocd.argoproj.io/hook: Sync # Every time we run a sync, Argo will rerun this Job. This means if we change the ConfigMap and run a sync, this achieves our goal of onboard/offboard
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded # Delete when Job succeeds
     argocd.argoproj.io/sync-wave: "2" # So the job runs after all the pre-reqs are created

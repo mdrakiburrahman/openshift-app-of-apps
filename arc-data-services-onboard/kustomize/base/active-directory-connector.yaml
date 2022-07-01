@@ -3,8 +3,6 @@ kind: ActiveDirectoryConnector
 metadata:
   name: adarc
   namespace: azure-arc-data
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
 spec:
   activeDirectory:
     realm: SUBDOMAIN.DOMAIN.COM
@@ -14,7 +12,9 @@ spec:
     domainServiceAccountSecret: adarc-dsa-secret
     domainControllers:
       primaryDomainController:
-        hostname: dc.subdomain.domain.com
+        hostname: dc1.subdomain.domain.com
+      secondaryDomainControllers:
+      - hostname: dc2.subdomain.domain.com
   dns:
     preferK8sDnsForPtrLookups: false
     nameserverIPAddresses:
