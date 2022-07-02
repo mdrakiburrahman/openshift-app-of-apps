@@ -1,8 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: single-job-hook-no
+---
 apiVersion: v1 
 kind: Secret 
 type: Opaque 
 metadata: 
   name: regular-secret # A regular secret that comes up with my main Job, would be good if this contributed to app health
+  namespace: single-job-hook-no
 data: 
   password: aGVsbG8K
   username: aGVsbG8K
@@ -11,6 +17,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: regular-job-no-hook # just a regular job, I want my app health to depend on this
+  namespace: single-job-hook-no
 spec:
   template:
     spec:
