@@ -9,7 +9,7 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: job-deleter-sa
+  name: job-delete-sa
   namespace: single-job-hook-no
   annotations:
     argocd.argoproj.io/hook: PreSync
@@ -38,7 +38,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "-2"
 subjects:
 - kind: ServiceAccount
-  name: job-deleter-sa
+  name: job-delete-sa
   namespace: single-job-hook-no
 roleRef:
   kind: Role
@@ -48,7 +48,7 @@ roleRef:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-deleter-job
+  name: job-delete-job
   namespace: single-job-hook-no
   annotations:
     argocd.argoproj.io/hook: preSync
@@ -57,7 +57,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: job-deleter-sa
+      serviceAccountName: job-delete-sa
       restartPolicy: Never
       containers:
         - name: job-deleter-kubectl
