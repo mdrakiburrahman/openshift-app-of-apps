@@ -44,3 +44,29 @@ roleRef:
   kind: Role
   name: job-delete-role
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-deleter-job
+  namespace: single-job-hook-no
+  annotations:
+    argocd.argoproj.io/hook: preSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  template:
+    spec:
+      serviceAccountName: job-deleter-sa
+      restartPolicy: Never
+      containers:
+        - name: job-deleter-kubectl
+          image: registry.redhat.io/openshift4/ose-cli
+          command:
+            - /bin/kubectl
+            - delete 
+            - job
+            - regular-job-no-hook
+            - --ignore-not-found=true
+            - -n
+            - single-job-hook-no
