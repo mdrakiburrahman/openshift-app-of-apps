@@ -51,7 +51,7 @@ metadata:
   name: job-delete-job
   namespace: single-job-hook-no
   annotations:
-    argocd.argoproj.io/hook: preSync
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
     argocd.argoproj.io/sync-wave: "-1"
 spec:
