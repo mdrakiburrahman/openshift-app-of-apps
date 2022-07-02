@@ -16,3 +16,7 @@ spec:
     path: ${unique-path-per-overlay}
     repoURL: 'https://github.com/mdrakiburrahman/openshift-app-of-apps.git'
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
