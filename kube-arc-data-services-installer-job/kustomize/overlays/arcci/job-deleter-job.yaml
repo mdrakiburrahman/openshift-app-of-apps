@@ -9,7 +9,7 @@ metadata:
 data:
   entrypoint.sh: |-
     #!/bin/bash
-    kubectl delete job regular-job-no-hook --ignore-not-found=true -n single-job-hook-no
+    kubectl delete job azure-arc-kubernetes-bootstrap --ignore-not-found=true -n azure-arc-kubernetes-bootstrap
 ---
 apiVersion: batch/v1
 kind: Job

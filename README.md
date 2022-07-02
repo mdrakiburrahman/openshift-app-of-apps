@@ -53,6 +53,7 @@ kubectl create secret \
 
 Generate the YAML Argo would end up applying:
 ```bash
+rm -rf .temp
 mkdir .temp
 
 # Argo Application
@@ -60,16 +61,13 @@ kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overla
 
 # Components
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-healthcheck/kustomize/overlays/arcci > .temp/arc-healthcheck.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/job-cleaner/kustomize/overlays/arcci > .temp/job-cleaner.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/machineset/kustomize/overlays/arcci > .temp/machineset.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/metallb/kustomize/overlays/arcci > .temp/metallb.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/sealed-secrets/kustomize/overlays/arcci > .temp/sealed-secrets.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/kube-arc-data-services-installer-job/kustomize/overlays/arcci > .temp/kube-arc-data-services-installer-job.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-active-directory-connector/kustomize/overlays/arcci > .temp/arc-active-directory-connector.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/sql-gp-ad-1/kustomize/overlays/arcci > .temp/sql-gp-ad-1.yaml
-
-# Jobs demo
-kubectl kustomize /workspaces/openshift-app-of-apps/job-cleaner/kustomize/overlays/arcci > .temp/job-cleaner.yaml
-kubectl kustomize /workspaces/openshift-app-of-apps/single-job-hook-no/kustomize/overlays/arcci > .temp/single-job-hook-no.yaml
 ```
 
 Dry run:

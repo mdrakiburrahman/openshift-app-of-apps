@@ -23,6 +23,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   # https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/
+  # This is for our Sealed Secret data being injected in
   ignoreDifferences:
     - kind: Secret
       jsonPointers:
