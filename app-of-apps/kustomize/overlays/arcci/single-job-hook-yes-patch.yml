@@ -1,8 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: single-job-hook-yes
-  namespace: argocd
-spec:
-  source:
-    path: single-job-hook-yes/kustomize/overlays/arcci

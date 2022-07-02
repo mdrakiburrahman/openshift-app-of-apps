@@ -9,6 +9,4 @@ resources:
   - kube-arc-data-services-installer-job.yaml
   - arc-active-directory-connector.yaml
   - sql-gp-ad-1.yaml
-  - many-jobs-demo.yml
-  - single-job-hook-no.yml
-  - single-job-hook-yes.yml
+  - single-job-hook-no.yaml
