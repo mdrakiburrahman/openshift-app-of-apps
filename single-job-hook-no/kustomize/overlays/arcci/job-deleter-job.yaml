@@ -56,8 +56,8 @@ metadata:
 data:
   entrypoint.sh: |-
     #!/bin/bash
-    /bin/kubectl get jobs -n single-job-hook-no
-    echo "Sleeping 10"
+    /bin/kubectl delete job regular-job-no-hook --ignore-not-found=true -n single-job-hook-no
+    echo "sleeping 10 so you can read the logs..."
     sleep 10
 ---
 apiVersion: batch/v1
