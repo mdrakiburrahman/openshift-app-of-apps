@@ -10,8 +10,8 @@ data:
   entrypoint.sh: |-
     #!/bin/bash
     /bin/kubectl delete job regular-job-no-hook --ignore-not-found=true -n single-job-hook-no
-    echo "sleeping 10 so you can read the logs before Argo deletes me..."
-    sleep 10
+    echo "sleeping 100 so you can read the logs before Argo deletes me..."
+    sleep 100
 ---
 apiVersion: batch/v1
 kind: Job
