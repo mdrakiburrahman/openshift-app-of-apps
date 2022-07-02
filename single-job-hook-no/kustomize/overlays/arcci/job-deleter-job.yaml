@@ -68,3 +68,4 @@ spec:
             - jobs
             - -n
             - single-job-hook-no
+            - sleep 5
