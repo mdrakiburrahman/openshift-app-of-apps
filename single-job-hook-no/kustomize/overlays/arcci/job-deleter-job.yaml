@@ -70,9 +70,9 @@ metadata:
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
     argocd.argoproj.io/sync-wave: "-1"
 spec:
+  backoffLimit: 2
   template:
     spec:
-      backoffLimit: 2
       serviceAccountName: job-delete-sa
       restartPolicy: Never
       containers:
