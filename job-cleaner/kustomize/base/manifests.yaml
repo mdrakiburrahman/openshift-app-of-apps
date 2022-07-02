@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: job-cleaner
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "1"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: job-delete-sa
+  namespace: job-cleaner
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "2"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: job-delete-clusterrole
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "3"
+rules:
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["get", "watch", "list", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: job-delete-clusterrolebinding
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "4"
+subjects:
+- kind: ServiceAccount
+  name: job-delete-sa
+  namespace: job-cleaner
+roleRef:
+  kind: ClusterRole
+  name: job-delete-clusterrole
+  apiGroup: rbac.authorization.k8s.io

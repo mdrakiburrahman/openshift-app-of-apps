@@ -1,90 +1,45 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: job-cleaner
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-5"
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: job-delete-sa
-  namespace: job-cleaner
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-4"
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: job-delete-clusterrole
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-3"
-rules:
-- apiGroups: ["batch"]
-  resources: ["jobs"]
-  verbs: ["get", "watch", "list", "delete"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: job-delete-clusterrolebinding
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-2"
-subjects:
-- kind: ServiceAccount
-  name: job-delete-sa
-  namespace: job-cleaner
-roleRef:
-  kind: ClusterRole
-  name: job-delete-clusterrole
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: job-delete-job-command
-  namespace: job-cleaner
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "-2"
-data:
-  entrypoint.sh: |-
-    #!/bin/bash
-    /bin/kubectl delete job regular-job-no-hook --ignore-not-found=true -n single-job-hook-no
-    echo "sleeping 10 so you can read the logs..."
-    sleep 10
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: job-delete-job
-  namespace: job-cleaner
-  annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/sync-wave: "-1"
-spec:
-  backoffLimit: 2
-  template:
-    spec:
-      serviceAccountName: job-delete-sa
-      restartPolicy: Never
-      containers:
-        - name: job-deleter-kubectl
-          image: registry.redhat.io/openshift4/ose-cli
-          command:
-          - /bin/entrypoint.sh
-          volumeMounts:
-          - name: configmap-volume
-            mountPath: /bin/entrypoint.sh
-            readOnly: true
-            subPath: entrypoint.sh
-      volumes:
-      - name: configmap-volume
-        configMap:
-          defaultMode: 0700
-          name: job-delete-job-command
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: job-delete-job-command
+#   namespace: job-cleaner
+#   annotations:
+#     argocd.argoproj.io/hook: PreSync
+#     argocd.argoproj.io/sync-wave: "-2"
+# data:
+#   entrypoint.sh: |-
+#     #!/bin/bash
+#     /bin/kubectl delete job regular-job-no-hook --ignore-not-found=true -n single-job-hook-no
+#     echo "sleeping 10 so you can read the logs..."
+#     sleep 10
+# ---
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: job-delete-job
+#   namespace: job-cleaner
+#   annotations:
+#     argocd.argoproj.io/hook: PreSync
+#     argocd.argoproj.io/hook-delete-policy: HookSucceeded
+#     argocd.argoproj.io/sync-wave: "-1"
+# spec:
+#   backoffLimit: 2
+#   template:
+#     spec:
+#       serviceAccountName: job-delete-sa
+#       restartPolicy: Never
+#       containers:
+#         - name: job-deleter-kubectl
+#           image: registry.redhat.io/openshift4/ose-cli
+#           command:
+#           - /bin/entrypoint.sh
+#           volumeMounts:
+#           - name: configmap-volume
+#             mountPath: /bin/entrypoint.sh
+#             readOnly: true
+#             subPath: entrypoint.sh
+#       volumes:
+#       - name: configmap-volume
+#         configMap:
+#           defaultMode: 0700
+#           name: job-delete-job-command
