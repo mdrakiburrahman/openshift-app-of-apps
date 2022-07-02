@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
 - ../../base
-# - job-deleter-job.yaml
+- job-deleter-job.yaml
