@@ -10,4 +10,3 @@ resources:
   # - arc-active-directory-connector.yaml
   # - sql-gp-ad-1.yaml
   - job-cleaner.yaml
-  - single-job-hook-no.yaml
