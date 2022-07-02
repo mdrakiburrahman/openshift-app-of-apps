@@ -30,7 +30,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: job-deleter-kubectl
-          image: registry.redhat.io/openshift4/ose-cli
+          image: bitnami/kubectl:latest
           command:
           - /bin/entrypoint.sh
           volumeMounts:
