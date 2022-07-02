@@ -65,13 +65,6 @@ spec:
           command:
             - /bin/kubectl
             - get 
-            - job
+            - jobs
             - -n
             - single-job-hook-no
-
-command:
- - /bin/sh
- - -c
- - counter=0; while [ $counter -lt 3 ]; do
-counter=$((counter+1)); \
- echo "$counter"; sleep 3; done;
