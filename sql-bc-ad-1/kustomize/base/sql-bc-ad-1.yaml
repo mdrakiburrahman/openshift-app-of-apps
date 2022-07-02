@@ -1,0 +1,58 @@
+apiVersion: sql.arcdata.microsoft.com/v5
+kind: SqlManagedInstance
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: sql-bc-ad-1
+  namespace: azure-arc-data
+spec:
+  tier: BusinessCritical
+  backup:
+    retentionPeriodInDays: 7
+  dev: true
+  forceHA: "true"
+  licenseType: LicenseIncluded
+  replicas: 3
+  scheduling:
+    default:
+      resources:
+        limits:
+          cpu: "2"
+          memory: 4Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+  security:
+    adminLoginSecret: sql-bc-ad-1-secret
+    activeDirectory:
+      connector:
+        name: adarc
+      accountName: sql-bc-ad-1-account
+  services:
+    primary:
+      type: LoadBalancer
+      dnsName: sql-bc-ad-1.fg.contoso.com
+      port: 31433
+  settings:
+    network:
+      forceencryption: "0"
+      tlsprotocols: "1.2"
+    sqlagent:
+      enabled: "true"
+  storage:
+    backups:
+      volumes:
+        - className: azure-file
+          size: 5Gi
+    data:
+      volumes:
+        - className: thin-csi
+          size: 5Gi
+    datalogs:
+      volumes:
+        - className: thin-csi
+          size: 5Gi
+    logs:
+      volumes:
+        - className: thin-csi
+          size: 5Gi

@@ -68,6 +68,7 @@ kubectl kustomize /workspaces/openshift-app-of-apps/sealed-secrets/kustomize/ove
 kubectl kustomize /workspaces/openshift-app-of-apps/kube-arc-data-services-installer-job/kustomize/overlays/arcci > .temp/kube-arc-data-services-installer-job.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-active-directory-connector/kustomize/overlays/arcci > .temp/arc-active-directory-connector.yaml
 kubectl kustomize /workspaces/openshift-app-of-apps/sql-gp-ad-1/kustomize/overlays/arcci > .temp/sql-gp-ad-1.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/sql-bc-ad-1/kustomize/overlays/arcci > .temp/sql-bc-ad-1.yaml
 ```
 
 Dry run:

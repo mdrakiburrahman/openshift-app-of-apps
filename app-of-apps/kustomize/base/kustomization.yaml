@@ -10,3 +10,4 @@ resources:
   - kube-arc-data-services-installer-job.yaml
   - arc-active-directory-connector.yaml
   - sql-gp-ad-1.yaml
+  - sql-bc-ad-1.yaml
