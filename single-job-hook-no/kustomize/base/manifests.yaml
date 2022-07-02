@@ -17,5 +17,5 @@ spec:
       containers:
         - name: job
           image: nginxinc/nginx-unprivileged
-          command: ["sleep", "10"]
+          command: ["sleep", "3"]
       restartPolicy: Never

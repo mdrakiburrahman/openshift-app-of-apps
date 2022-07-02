@@ -44,29 +44,34 @@ roleRef:
   kind: Role
   name: job-delete-role
   apiGroup: rbac.authorization.k8s.io
-# ---
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   name: job-delete-job
-#   namespace: single-job-hook-no
-#   annotations:
-#     argocd.argoproj.io/hook: PreSync
-#     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-#     argocd.argoproj.io/sync-wave: "-1"
-# spec:
-#   template:
-#     spec:
-#       serviceAccountName: job-delete-sa
-#       restartPolicy: Never
-#       containers:
-#         - name: job-deleter-kubectl
-#           image: registry.redhat.io/openshift4/ose-cli
-#           command:
-#             - /bin/kubectl
-#             - delete 
-#             - job
-#             - regular-job-no-hook
-#             - --ignore-not-found=true
-#             - -n
-#             - single-job-hook-no
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-delete-job
+  namespace: single-job-hook-no
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  template:
+    spec:
+      serviceAccountName: job-delete-sa
+      restartPolicy: Never
+      containers:
+        - name: job-deleter-kubectl
+          image: registry.redhat.io/openshift4/ose-cli
+          command:
+            - /bin/kubectl
+            - get 
+            - job
+            - -n
+            - single-job-hook-no
+
+command:
+ - /bin/sh
+ - -c
+ - counter=0; while [ $counter -lt 3 ]; do
+counter=$((counter+1)); \
+ echo "$counter"; sleep 3; done;
