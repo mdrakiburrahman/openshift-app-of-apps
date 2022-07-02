@@ -45,6 +45,21 @@ roleRef:
   name: job-delete-role
   apiGroup: rbac.authorization.k8s.io
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: job-delete-job-command
+  namespace: single-job-hook-no
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "-2"
+data:
+  entrypoint.sh: |-
+    #!/bin/bash
+    /bin/kubectl get jobs -n single-job-hook-no
+    echo "Sleeping 10"
+    sleep 10
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -57,15 +72,21 @@ metadata:
 spec:
   template:
     spec:
+      backoffLimit: 2
       serviceAccountName: job-delete-sa
       restartPolicy: Never
       containers:
         - name: job-deleter-kubectl
           image: registry.redhat.io/openshift4/ose-cli
           command:
-            - /bin/kubectl
-            - get 
-            - jobs
-            - -n
-            - single-job-hook-no
-            - sleep 5
+          - /bin/entrypoint.sh
+          volumeMounts:
+          - name: configmap-volume
+            mountPath: /bin/entrypoint.sh
+            readOnly: true
+            subPath: entrypoint.sh
+      volumes:
+      - name: configmap-volume
+        configMap:
+          defaultMode: 0700
+          name: job-delete-job-command
