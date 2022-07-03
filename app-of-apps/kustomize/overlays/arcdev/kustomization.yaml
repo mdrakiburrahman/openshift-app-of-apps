@@ -10,3 +10,4 @@ patchesStrategicMerge:
 - machineset-patch.yaml
 - sealed-secrets-patch.yaml
 - metallb-patch.yaml
+- delete-unneeded-apps.yaml

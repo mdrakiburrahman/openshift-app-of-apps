@@ -57,7 +57,8 @@ rm -rf .temp
 mkdir .temp
 
 # Argo Application
-kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overlays/arcci > .temp/argo.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overlays/arcci > .temp/argo-arcci.yaml
+kubectl kustomize /workspaces/openshift-app-of-apps/app-of-apps/kustomize/overlays/arcdev > .temp/argo-arcdev.yaml
 
 # Components
 kubectl kustomize /workspaces/openshift-app-of-apps/arc-healthcheck/kustomize/overlays/arcci > .temp/arc-healthcheck.yaml
