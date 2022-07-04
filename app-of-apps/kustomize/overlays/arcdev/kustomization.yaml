@@ -5,9 +5,9 @@ resources:
 - ../../base
 
 patchesStrategicMerge:
+- _app-exclusion-list.yaml
 - arc-healthcheck-patch.yaml
 - job-cleaner-patch.yaml
 - machineset-patch.yaml
 - sealed-secrets-patch.yaml
 - metallb-patch.yaml
-- delete-unneeded-apps.yaml
