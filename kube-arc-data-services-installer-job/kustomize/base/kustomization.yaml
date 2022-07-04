@@ -5,4 +5,4 @@ namespace: azure-arc-kubernetes-bootstrap
 
 # Points to the repo so we are not duplicating YAML
 bases:
-- git::https://github.com/KangarooKube/kube-arc-data-services-installer-job.git//kustomize/overlays/ocp?ref=v0.0.1
+- git::https://github.com/KangarooKube/kube-arc-data-services-installer-job.git//kustomize/overlays/ocp?ref=v0.0.2
