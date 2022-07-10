@@ -3,13 +3,10 @@ kind: Kustomization
 
 resources:
 - ../../base
-- configs/azure-spn-secret.yaml   # SealedSecret with encrypted Azure Login creds
-- job-deleter-job.yaml            # This is a PreSync Hooked job that deletes our Onboarder Job every time it runs. This allows us to run Onboarder Job multiple times, after we change the DELETE_FLAG and run Argo Sync - K8s doesn't allow this but with this workaround this works.
 
+# OpenShift specific patches to Job
 patchesStrategicMerge:
- - job-mount.yaml                  # Volume Mount for OpenShift specifics from "openshift-config" below
- - job-mode-patch.yaml             # Onboarder Job should run at the end of a Sync
- - env.yaml                        # Openshift mode enabler
+ - job-patch.yaml
 
 # Image tag corresponding to Arc release train: https://github.com/KangarooKube/kube-arc-data-services-installer-job/pkgs/container/kube-arc-data-services-installer-job
 images:
@@ -17,7 +14,7 @@ images:
   newName: ghcr.io/kangarookube/kube-arc-data-services-installer-job
   newTag: v1.9.0_2022-07-12_preview
 
-# ConfigMap: non-secrets
+# ConfigMap: non-secrets, env specific
 configMapGenerator:
 - name: config-envs
   namespace: azure-arc-kubernetes-bootstrap
@@ -32,36 +29,3 @@ configMapGenerator:
   files:
     - configs/arc-data-routes.yaml
     - configs/arc-data-scc.yaml
-
-# Secret: making this work with Sealed Secrets
-# https://github.com/kubernetes-sigs/kustomize/blob/master/examples/transformerconfigs/README.md#example
-configurations:
-  - configs/sealed-secret-config.yaml
-
-# Empty secret that will be overwritten by Sealed Secret above
-secretGenerator:
-- name: secret-envs
-  behavior: create
-  type: Opaque
-  namespace: azure-arc-kubernetes-bootstrap
-
-# Necessary for sealed Secrets to manage the generated Secret
-# https://github.com/kubernetes-sigs/kustomize/blob/master/examples/generatorOptions.md <- One Option, adds it to all Secrets and ConfigMaps
-# https://github.com/kubernetes-sigs/kustomize/issues/2179#issuecomment-582562891
-# https://fabianlee.org/2022/04/15/kubernetes-kustomize-transformations-with-patchesjson6902/
-# https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/patches/ <- Best option, used below
-patches:
-  - patch: |-
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: secret-envs
-        annotations:
-          sealedsecrets.bitnami.com/managed: "true"
-          sealedsecrets.bitnami.com/namespace-wide: "true"
-          argocd.argoproj.io/sync-wave: "1" # So this comes up before the Job to avoid race condition
-    target:
-      version: v1
-      kind: Secret
-      name: secret-envs
-      namespace: azure-arc-kubernetes-bootstrap
