@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: job-delete-job-command
+  namespace: job-cleaner
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "-2"
+data:
+  entrypoint.sh: |-
+    #!/bin/bash
+    kubectl delete job azure-arc-kubernetes-bootstrap --ignore-not-found=true -n azure-arc-kubernetes-bootstrap
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-delete-job
+  namespace: job-cleaner
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      serviceAccountName: job-delete-sa
+      restartPolicy: Never
+      containers:
+        - name: job-deleter-kubectl
+          image: bitnami/kubectl:latest
+          command:
+          - /bin/entrypoint.sh
+          volumeMounts:
+          - name: configmap-volume
+            mountPath: /bin/entrypoint.sh
+            readOnly: true
+            subPath: entrypoint.sh
+      volumes:
+      - name: configmap-volume
+        configMap:
+          defaultMode: 0700
+          name: job-delete-job-command
