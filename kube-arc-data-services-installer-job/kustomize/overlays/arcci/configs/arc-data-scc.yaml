@@ -1,0 +1,29 @@
+# For Arc Agents
+# https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster?tabs=azure-cli#prerequisites
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:openshift:scc:privileged
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:privileged
+subjects:
+- kind: ServiceAccount
+  name: azure-arc-kube-aad-proxy-sa
+  namespace: azure-arc
+---
+# For getting host Metrics for Grafana via metricsdc daemonset
+# https://docs.microsoft.com/en-us/azure/azure-arc/data/create-data-controller-using-kubernetes-native-tools#create-the-data-controller
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:openshift:scc:hostaccess
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:hostaccess
+subjects:
+- kind: ServiceAccount
+  name: sa-arc-metricsdc-reader
+  namespace: azure-arc-data
