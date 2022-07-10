@@ -15,3 +15,10 @@ spec:
         volumeMounts:
         - name: openshift-config
           mountPath: /home/container-user/openshift
+        env:
+          - name: VERBOSE
+            value: "false"
+          - name: ONBOARDING_TIMEOUT
+            value: "1200"
+          - name: OPENSHIFT
+            value: "true"
