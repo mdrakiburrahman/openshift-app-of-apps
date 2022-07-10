@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: azure-arc-kubernetes-bootstrap
+  namespace: azure-arc-kubernetes-bootstrap
+spec:
+  template:
+    spec:
+      volumes:
+        - name: openshift-config
+          configMap:
+            name: openshift-config
+      containers:
+      - name: azure-arc-kubernetes-bootstrap
+        volumeMounts:
+        - name: openshift-config
+          mountPath: /home/container-user/openshift
