@@ -1,10 +1,10 @@
-# $patch: delete
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: kube-arc-data-services-installer-job
-#   namespace: argocd
-# ---
+$patch: delete
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-arc-data-services-installer-job
+  namespace: argocd
+---
 $patch: delete
 apiVersion: argoproj.io/v1alpha1
 kind: Application
