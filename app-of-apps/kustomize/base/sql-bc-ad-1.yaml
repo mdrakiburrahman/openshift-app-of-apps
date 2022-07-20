@@ -17,8 +17,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: azure-arc-data
   syncPolicy:
-    automated:
-      prune: true
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
       selfHeal: true
     syncOptions:
       - CreateNamespace=false # azure-arc-data already exists
+      - Validate=false # disables resource validation (equivalent to 'kubectl apply --validate=false') ( true by default ).
