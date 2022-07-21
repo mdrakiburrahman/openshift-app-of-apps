@@ -14,4 +14,4 @@ patchesStrategicMerge:
 - kube-arc-data-services-installer-job-patch.yaml
 - arc-active-directory-connector-patch.yaml
 - sql-gp-ad-1-patch.yaml
-# - sql-bc-ad-1-patch.yaml
+- sql-bc-ad-1-patch.yaml
