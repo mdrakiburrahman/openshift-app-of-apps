@@ -18,7 +18,7 @@ spec:
     namespace: azure-arc-data
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=false # azure-arc-data already exists
+      - Validate=false
